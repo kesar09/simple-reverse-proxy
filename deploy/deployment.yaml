@@ -1,19 +1,23 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: reverseproxy
-  name: reverseproxy
+    service: simple-reverse-proxy
+  name: simple-reverse-proxy
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: simple-reverse-proxy
   template:
     metadata:
       labels:
-        service: reverseproxy
+        app: simple-reverse-proxy
+        service: reverse-proxy
     spec:
       containers:
       - image: kesar09/simple-reverse-proxy
-        name: reverseproxy
+        name: simple-reverse-proxy
         imagePullPolicy: Always          
         resources:
           requests:
